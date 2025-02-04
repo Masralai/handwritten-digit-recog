@@ -65,17 +65,17 @@ print(f"Test Accuracy: {accuracy}")
 #--------------------
 
 def preprocess_image(image_path):
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)  #Converts the image to grayscale (single channel)
-    img = cv2.resize(img, (28, 28))  #Resizes the image to 28x28 pixels (the standard MNIST image size)
-    img = np.invert(img)  #Inverts the colors (so digits appear as white on black, like MNIST)
-    img = img.astype('float32') / 255.0  #Scales the pixel values to [0, 1]
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)  
+    img = cv2.resize(img, (28, 28)) 
+    img = np.invert(img) 
+    img = img.astype('float32') / 255.0 
     
     
     if np.sum(img) < 100:    #If the image is too thin (low pixel sum), it adds padding to ensure the digit is centered.
         img = cv2.copyMakeBorder(img, 4, 4, 4, 4, cv2.BORDER_CONSTANT, value=0)
         img = cv2.resize(img, (28, 28))
     
-    img = img.reshape(1, 28, 28, 1)  #Reshapes the image to fit the model’s input shape.
+    img = img.reshape(1, 28, 28, 1)  
     return img
 
 #--------------------
